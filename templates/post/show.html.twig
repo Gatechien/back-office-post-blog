@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Post {% endblock %}
+
+{% block body %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url({{asset('img/star.jpg')}})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Post Blog</h1>
+                            <span class="subheading">Vous êtes sur {{ (post.title) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main>
+            <div class="container px-4 px-lg-6">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-preview">
+                            <a>
+                                <h2 class="post-title">{{ (post.title) }}</h2>
+                                <h3 class="post-subtitle">{{ (post.body) }}</h3>
+                            </a>
+                            <p class="post-meta">
+                                Posté le : <strong>{{ post.publishedAt|date("m/d/Y", "Europe/Paris") }}</strong> par <strong>{{ (post.author.firstName) }} {{ (post.author.lastName) }}</strong><br>
+                                <strong>{{ (post.nbLikes) }}</strong> personnes aiment ce post
+
+                                <form action="" method="post">
+                                    <button class="btn btn-primary btn-sm" type="submit" name="NbLikesUp" value="1">
+                                        <span><i class="fa fa-thumbs-up"></i></span>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" type="submit" name="NbLikesDown" value="1">
+                                        <span><i class="fa-solid fa-thumbs-down"></i></span>
+                                    </button>
+                                </form>
+                            <br>
+                            
+                            {% for tag in post.tags %}
+                                <button type="button" class="btn btn-primary btn-sm">
+                            {{ tag.name }}
+                                </button>
+                            {% else %}
+                               aucun tag
+                            {% endfor %}
+</p>
+                            <div class="my-2">
+                                <a class="btn btn-primary" type="button" href="{{ path('add_comment', {id: post.id}) }}"><span>Ajouter un commentaire</span></a>
+                            </div>
+                            
+                            <h4 class="post-subtitle my-3">Commentaires</h4>
+                            {% for comment in post.comments %}
+                            <div class="post-preview my-2">
+                            <p class="post-meta">
+                                <strong>{{ comment.username }}</strong> le <strong>{{ post.publishedAt|date("m/d/Y", "Europe/Paris") }}</strong><br>
+                                {{ comment.body }}<br>
+                            </p>
+                            </div>
+                            <hr class="my-4" />
+                        {% else %}
+                            <em>Aucun commentaire</em>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+{% endblock %}

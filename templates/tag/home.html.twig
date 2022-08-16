@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des Tags {% endblock %}
+
+{% block body %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url({{asset('img/star.jpg')}})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Post Blog</h1>
+                            <span class="subheading">A Blog Post by Tuquet Adrien</span>
+                            <span class="subheading">Liste des Tags</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main>
+        <div class="text-center my-5">
+            <a class="btn btn-primary" type="button" href="{{ path('add_tag') }}"><span>Ajouter un tag</span></a>
+        </div>
+        {% for tag in tags %}
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7"> 
+                        <div class="post-preview">
+                            <a>
+                                <h2 class="post-title">{{ (tag.name) }}</h2>
+                            </a>
+                            <p class="post-meta mb-2">
+                                Post lié à ce Tag :<br>
+                            </p>
+                        {% for post in tag.getPosts() %}
+                            <div class="post-preview my-2">
+                            <p class="post-meta my-2">
+                                <a class="btn btn-primary btn-sm" href="{{ path('show', {id: post.id}) }}" type="button"><span>{{ post.title }} </a> le : {{ post.createdAt|date("m/d/Y", "Europe/Paris") }}<br>
+                            </p>
+                            </div>
+                        {% else %}
+                            <em>Aucun post</em>
+                        {% endfor %}
+                            <div class="text-center my-3">
+                                <a class="btn btn-primary" href="{{ path('update_tag', {id: tag.id}) }}" type="button">Mofifier</a>
+                                <a onclick="return confirm('Supprimer le tag #{{ tag.name }}')" class="btn btn-danger" href="{{ path('delete_tag', {id: tag.id}) }}">Supprimer</a>
+                            </div>
+                            <hr class="my-4" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <em>Aucun auteur</em>
+        {% endfor %}
+        </main>
+{% endblock %}

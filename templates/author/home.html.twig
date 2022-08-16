@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des Auteurs {% endblock %}
+
+{% block body %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url({{asset('img/star.jpg')}})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Post Blog</h1>
+                            <span class="subheading">A Blog Post by Tuquet Adrien</span>
+                            <span class="subheading">Liste des Auteurs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main>
+        <div class="text-center my-5">
+            <a class="btn btn-primary" type="button" href="{{ path('add_author') }}"><span>Ajouter un auteur</span></a>
+        </div>
+        {% for author in authors %}
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7"> 
+                        <div class="post-preview">
+                            <a>
+                                <h2 class="post-title">{{ (author.firstname) }} {{ (author.lastname) }}</h2>
+                            </a>
+                            <p class="post-meta mb-2">
+                                Ajouté le : {{ author.createdAt|date("m/d/Y", "Europe/Paris") }}<br>
+                                à publié :<br>
+                            </p>
+                        {% for post in author.getpost() %}
+                            <div class="post-preview my-2">
+                            <p class="post-meta my-2">
+                                <a class="btn btn-primary btn-sm" href="{{ path('show', {id: post.id}) }}" type="button"><span>{{ post.title }} </a> le : {{ post.createdAt|date("m/d/Y", "Europe/Paris") }}<br>
+                            </p>
+                            </div>
+                        {% else %}
+                            <em>Aucun post</em>
+                        {% endfor %}
+                            <div class="text-center my-3">
+                                <a class="btn btn-primary" href="{{ path('update_author', {id: author.id}) }}" type="button">Mofifier</a>
+                                <a onclick="return confirm('Supprimer l\'auteur #{{ author.firstname }} {{ author.lastname }}')" class="btn btn-danger" href="{{ path('delete_author', {id: author.id}) }}">Supprimer</a>
+                            </div>
+                            <hr class="my-4" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <em>Aucun auteur</em>
+        {% endfor %}
+        </main>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des Commentaires {% endblock %}
+
+{% block body %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url({{asset('img/star.jpg')}})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Post Blog</h1>
+                            <span class="subheading">A Blog Post by Tuquet Adrien</span>
+                            <span class="subheading">Liste des Commentaires</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main>
+        {% for comment in comments %}
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7"> 
+                        <div class="post-preview">
+                            <a>
+                                <h2 class="post-title">{{ (comment.username) }}</h2>
+                                <h3 class="post-subtitle">{{ (comment.body) }}</h3>
+                            </a>
+                            <p class="post-meta mb-2">
+                                Ajouté le : {{ comment.createdAt|date("m/d/Y", "Europe/Paris") }}<br>
+                                à commenté :<br>
+                            </p>
+                                <div class="post-preview my-2">
+                                <p class="post-meta my-2">
+                                    <a class="btn btn-primary btn-sm" href="{{ path('show', {id: comment.post.id}) }}" type="button"><span>{{ comment.post.title }} </a> le : {{ comment.post.createdAt|date("m/d/Y", "Europe/Paris") }}<br>
+                                </p>
+                                </div>
+                            <div class="text-center my-3">
+                                <a class="btn btn-primary" href="{{ path('update_comment', {id: comment.id}) }}" type="button">Mofifier</a>
+                                <a onclick="return confirm('Supprimer le commentaire de #{{ comment.username }}')" class="btn btn-danger" href="{{ path('delete_comment', {id: comment.id}) }}">Supprimer</a>
+                            </div>
+                            <hr class="my-4" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <em>Aucun auteur</em>
+        {% endfor %}
+        </main>
+{% endblock %}

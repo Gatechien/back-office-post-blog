@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter un Tag {% endblock %}
+
+{% block body %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url({{asset('img/star.jpg')}})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Post Blog</h1>
+                            <span class="subheading">à toi d'écrire</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main class="mb-4">
+            <div class="container px-4 px-lg-6">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-preview my-5">
+                            <h3 class="post-title my-2">Pour ajouter un Tag, <br> merci de remplir la chaine de caractère.</h3>
+                            <div class="post-meta">
+                        {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+
+                        {{ form_widget(form) }}
+                                <br />
+                                <div class="text-center">
+                                    <button class="btn btn-primary text-uppercase disable" type="submit">Ajouter</button>
+                                </div>
+                            </div>
+                        {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+{% endblock %}

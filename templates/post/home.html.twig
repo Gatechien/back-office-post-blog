@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des articles {% endblock %}
+
+{% block body %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url({{asset('img/star.jpg')}})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Post Blog</h1>
+                            <span class="subheading">A Blog Post by Tuquet Adrien</span>
+                            <span class="subheading">Liste des Articles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main>
+        <div class="text-center my-5">
+            <a class="btn btn-primary" type="button" href="{{ path('add') }}"><span>Ajouter un article</span></a>
+        </div>
+        {% for post in postList %}
+            <div class="container px-4 px-lg-6">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        
+                        <div class="post-preview">
+                            <a href="{{ path('show', {id: post.id}) }}">
+                                <h2 class="post-title">{{ (post.title) }}</h2>
+                                <h3 class="post-subtitle">{{ (post.body|striptags|slice(0, 100)) }} ...</h3>
+                            </a>
+                            <p class="post-meta">
+                                Posté le : {{ post.publishedAt|date("m/d/Y", "Europe/Paris") }} par {{ (post.author.firstName) }} {{ (post.author.lastName) }}<br>
+                                {{ (post.nbLikes) }} personnes aiment ce post<br>
+                            </p>
+                        </div>
+                            <div class="text-center my-3">
+                                <a class="btn btn-primary" href="{{ path('update', {id: post.id}) }}" type="button">Mofifier</a>
+                                <a onclick="return confirm('Supprimer l\'article #{{ post.title }}')" class="btn btn-danger" href="{{ path('delete', {id: post.id}) }}">Supprimer</a>
+                            </div>
+                        <hr class="my-4" />
+                        <!-- Pager-->
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <em>Aucun post</em>
+        {% endfor %}
+        </main>
+{% endblock %}
