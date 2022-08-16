@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  */
@@ -17,47 +19,70 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("app_api_post_browse")
+     * @Groups("app_api_post")
+     * @Groups("app_api_comment")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("app_api_post_browse")
+     * @Groups("app_api_post")
+     * @Groups("app_api_author")
+     * @Groups("app_api_tag")
+     * @Groups("app_api_comment")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("app_api_post_browse")
+     * @Groups("app_api_post")
      */
     private $body;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("app_api_post_browse")
+     * @Groups("app_api_post")
      */
     private $nbLikes;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("app_api_post_browse")
+     * @Groups("app_api_post")
+     * @Groups("app_api_author")
+     * @Groups("app_api_tag")
      */
     private $publishedAt;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups("app_api_post_browse")
+     * @Groups("app_api_post")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("app_api_post_browse")
+     * @Groups("app_api_post")
      */
     private $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("app_api_post_browse")
+     * @Groups("app_api_post")
      */
     private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="post")
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="post", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("app_api_post")
      */
     private $author;
 
@@ -67,7 +92,8 @@ class Post
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="posts")
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="posts", cascade={"persist"})
+     * @Groups("app_api_post")
      */
     private $tags;
 

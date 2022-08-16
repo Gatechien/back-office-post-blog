@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * @ORM\Entity(repositoryClass=TagRepository::class)
  */
@@ -16,16 +18,22 @@ class Tag
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("app_api_tag_browse")
+     * @Groups("app_api_tag")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups("app_api_tag_browse")
+     * @Groups("app_api_tag")
+     * @Groups("app_api_post")
      */
     private $name;
 
     /**
      * @ORM\ManyToMany(targetEntity=Post::class, mappedBy="tags")
+     * @Groups("app_api_tag")
      */
     private $posts;
 

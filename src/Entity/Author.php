@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * @ORM\Entity(repositoryClass=AuthorRepository::class)
  */
@@ -16,31 +18,44 @@ class Author
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("app_api_author_browse")
+     * @Groups("app_api_author")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups("app_api_author_browse")
+     * @Groups("app_api_author")
+     * @Groups("app_api_post")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups("app_api_author_browse")
+     * @Groups("app_api_author")
+     * @Groups("app_api_post")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups("app_api_author_browse")
+     * @Groups("app_api_author")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups("app_api_author_browse")
+     * @Groups("app_api_author")
      */
     private $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="author", orphanRemoval=true)
+     * @Groups("app_api_author")
      */
     private $post;
 
