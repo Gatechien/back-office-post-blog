@@ -31,7 +31,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/post/add/comment/{id}", name="add_comment", methods={"POST","GET"}, requirements={"id"="\d+"})
+     * @Route("/add/comment/{id}", name="add_comment", methods={"POST","GET"}, requirements={"id"="\d+"})
      * 
      * @param ManagerRegistry $doctrine
      * @param Comment $comment
@@ -62,7 +62,7 @@ class CommentController extends AbstractController
     }
 
     /**
-    * @Route("/post/comment/{id}", name="update_comment", methods={"POST","GET"}, requirements={"id"="\d+"})
+    * @Route("/update/comment/{id}", name="update_comment", methods={"POST","GET"}, requirements={"id"="\d+"})
     *
     * @param Comment $comment
     * @param CommentRepository $commentRepository
@@ -89,7 +89,7 @@ class CommentController extends AbstractController
     
 
     /**
-     * @Route("/post/delete/comment/{id}", name="delete_comment")
+     * @Route("/delete/comment/{id}", name="delete_comment")
      *
      * @param [type] $id
      * @param ManagerRegistry $doctrine

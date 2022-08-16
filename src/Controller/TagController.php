@@ -21,7 +21,6 @@ class TagController extends AbstractController
      */
     public function home(TagRepository $tagRepository): Response
     {
-        $tagList = $tagRepository->findAll();
         $tags = $tagRepository->findBy([], ['name' => 'ASC']);
         return $this->render('tag/home.html.twig', [
             'tags' => $tags,
@@ -29,7 +28,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/post/tag/add", name="add_tag", methods={"POST","GET"})
+     * @Route("/add/tag", name="add_tag", methods={"POST","GET"})
      *
      * @param ManagerRegistry $doctrine
      * @param Request $request
@@ -56,7 +55,7 @@ class TagController extends AbstractController
     }
     
     /**
-    * @Route("/post/update/tag/{id}", name="update_tag", methods={"POST","GET"}, requirements={"id"="\d+"})
+    * @Route("/update/tag/{id}", name="update_tag", methods={"POST","GET"}, requirements={"id"="\d+"})
     *
     * @param TagRepository $tagRepository
     * @param Tag $tag
@@ -81,7 +80,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/post/delete/tag/{id}", name="delete_tag")
+     * @Route("/delete/tag/{id}", name="delete_tag")
      *
      * @param [type] $id
      * @param ManagerRegistry $doctrine

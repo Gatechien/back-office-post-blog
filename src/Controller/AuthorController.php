@@ -30,7 +30,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/post/author/add", name="add_author", methods={"POST","GET"})
+     * @Route("/add/author", name="add_author", methods={"POST","GET"})
      *
      * @param ManagerRegistry $doctrine
      * @param Request $request
@@ -59,7 +59,7 @@ class AuthorController extends AbstractController
     }   
 
     /**
-    * @Route("/post/update/author/{id}", name="update_author", methods={"POST","GET"}, requirements={"id"="\d+"})
+    * @Route("/update/author/{id}", name="update_author", methods={"POST","GET"}, requirements={"id"="\d+"})
     *
     * @param AuthorRepository $authorRepository
     * @param Author $author
@@ -85,7 +85,7 @@ class AuthorController extends AbstractController
     }
     
     /**
-     * @Route("/post/delete/author/{id}", name="delete_author")
+     * @Route("/delete/author/{id}", name="delete_author")
      *
      * @param [type] $id
      * @param ManagerRegistry $doctrine

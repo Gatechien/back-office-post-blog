@@ -67,7 +67,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/post/add", name="add", methods={"POST","GET"})
+     * @Route("/add/post", name="add", methods={"POST","GET"})
      * 
      * @param ManagerRegistry $doctrine
      * @param Request $request
@@ -96,7 +96,7 @@ class PostController extends AbstractController
     }
 
     /**
-    * @Route("/post/update/{id}", name="update", methods={"GET","POST"}, requirements={"id"="\d+"})
+    * @Route("/update/post/{id}", name="update", methods={"GET","POST"}, requirements={"id"="\d+"})
     *
     * @param PostRepository $postRepository
     * @param Post $post
@@ -122,7 +122,7 @@ class PostController extends AbstractController
     }
             
     /**
-     * @Route("/post/delete/{id}", name="delete")
+     * @Route("/delete/post/{id}", name="delete")
      *
      * @param [type] $id
      * @param ManagerRegistry $doctrine
